@@ -34,6 +34,14 @@ try:
 except Exception:
     pass
 
+# Dar permisos de SuperAdmin a miltonmoralesdiaz@gmail.com
+try:
+    with engine.connect() as conn:
+        conn.execute(text("UPDATE docentes SET es_admin = TRUE WHERE email = 'miltonmoralesdiaz@gmail.com';"))
+        conn.commit()
+except Exception:
+    pass
+
 # ── Aplicación FastAPI (Orquestador) ───────────────────────────
 app = FastAPI(
     title="AulaMaster Vision - Orquestador",

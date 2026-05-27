@@ -67,6 +67,9 @@ export function GestionEstudiantes() {
     <div className="max-w-5xl mx-auto p-6 space-y-6">
       <div className="flex justify-between items-center">
         <div>
+          <button onClick={() => window.history.back()} className="text-blue-500 hover:underline mb-2 inline-block font-medium">
+            ← Volver al Dashboard
+          </button>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
             <Users className="text-blue-500" />
             Gestión de Estudiantes
