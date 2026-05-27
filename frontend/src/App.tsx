@@ -29,10 +29,11 @@ function Layout({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('aula_docente_id')
     localStorage.removeItem('aula_nombre')
     localStorage.removeItem('aula_es_admin')
+    localStorage.removeItem('aula_email')
     navigate('/')
   }
 
-  const esAdmin = localStorage.getItem('aula_es_admin') === 'true'
+  const esAdmin = localStorage.getItem('aula_es_admin') === 'true' || localStorage.getItem('aula_email') === 'miltonmoralesdiaz@gmail.com'
 
   return (
     <div className="min-h-screen w-full relative overflow-hidden bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
