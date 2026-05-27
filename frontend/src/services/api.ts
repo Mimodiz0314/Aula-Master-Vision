@@ -2,7 +2,7 @@
 const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
 const BASE = IS_LOCAL
   ? 'http://localhost:8000/api'
-  : (import.meta.env.VITE_API_URL || 'https://aulamaster-backend.onrender.com/api')
+  : 'https://aulamaster-backend.onrender.com/api'
 
 function getToken(): string | null {
   return localStorage.getItem('aula_token')
