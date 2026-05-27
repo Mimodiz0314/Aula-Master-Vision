@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ArrowRight, Lock, User, GraduationCap, ChevronRight, CheckCircle2, Loader2, AlertCircle, BrainCircuit } from 'lucide-react'
+import { BASE } from '../services/api'
 
 // ── Tipos ──────────────────────────────────────────────────────
 type TipoPregunta = 'abierta' | 'opcion_multiple' | 'escala'
@@ -105,7 +106,7 @@ export function StudentEntry() {
     setCargando(true)
     setError('')
     try {
-      const res = await fetch(`http://localhost:8000/api/sesion/${accessCode.trim()}`)
+      const res = await fetch(`${BASE}/sesion/${accessCode.trim()}`)
       if (!res.ok) {
         const err = await res.json()
         setError(err.detail || 'Código inválido o la sesión no está activa.')
@@ -141,7 +142,7 @@ export function StudentEntry() {
     setCargando(true)
     setError('')
     try {
-      const res = await fetch('http://localhost:8000/api/sesion/responder', {
+      const res = await fetch(`${BASE}/sesion/responder`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

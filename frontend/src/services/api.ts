@@ -1,6 +1,6 @@
 // src/services/api.ts
-const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-const BASE = IS_LOCAL
+export const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+export const BASE = IS_LOCAL
   ? 'http://localhost:8000/api'
   : 'https://aulamaster-backend.onrender.com/api'
 
