@@ -10,23 +10,23 @@ from typing import List
 router = APIRouter(prefix="/api/admin", tags=["Administración"])
 
 class DocenteCreate(BaseModel):
-    nombre: string
-    email: string
-    password: string
+    nombre: str
+    email: str
+    password: str
     es_admin: bool = False
 
 class DocenteUpdate(BaseModel):
-    nombre: string | None = None
-    email: string | None = None
+    nombre: str | None = None
+    email: str | None = None
     es_admin: bool | None = None
 
 class DocentePasswordUpdate(BaseModel):
-    new_password: string
+    new_password: str
 
 class DocenteResponse(BaseModel):
     id: int
-    nombre: string
-    email: string
+    nombre: str
+    email: str
     es_admin: bool
 
 def verificar_admin(docente: Docente = Depends(obtener_docente_actual)):
