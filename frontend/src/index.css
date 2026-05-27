@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Font ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  }
+  .dark .glass {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(71, 85, 105, 0.4);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  }
+  .glass-card {
+    border-radius: 1rem;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+  .glass-card:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+  /* Gradient text */
+  .text-gradient {
+    background: linear-gradient(135deg, #14b8a6, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  /* Background orbs */
+  .bg-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  /* Fade-in-up animation for question cards */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.3s ease-out forwards;
+  }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+::selection {
+  background-color: #14b8a6;
+  color: #fff;
+}
