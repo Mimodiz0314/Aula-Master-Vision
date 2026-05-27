@@ -12,8 +12,27 @@ from models import db_models  # Registrar todos los modelos
 from routers.evaluaciones_router import router as evaluaciones_router
 from routers.auth_router import router as auth_router
 
+from sqlalchemy import text
+from routers.admin_router import router as admin_router
+from routers.estudiantes_router import router as estudiantes_router
+
 # ── Inicializar tablas en SQLite / PostgreSQL ────────────────────────────────
 Base.metadata.create_all(bind=engine)
+
+# ── Migraciones automáticas sin Alembic (Añadir columnas faltantes) ──────────
+try:
+    with engine.connect() as conn:
+        conn.execute(text("ALTER TABLE docentes ADD COLUMN es_admin BOOLEAN DEFAULT FALSE;"))
+        conn.commit()
+except Exception:
+    pass # Ya existe o no soportado
+
+try:
+    with engine.connect() as conn:
+        conn.execute(text("ALTER TABLE respuestas ADD COLUMN estudiante_id INTEGER REFERENCES estudiantes(id);"))
+        conn.commit()
+except Exception:
+    pass
 
 # ── Aplicación FastAPI (Orquestador) ───────────────────────────
 app = FastAPI(
@@ -57,6 +76,8 @@ app.add_middleware(
 # ── Registrar routers (Subagentes HTTP) ────────────────────────
 app.include_router(evaluaciones_router)
 app.include_router(auth_router)
+app.include_router(admin_router)
+app.include_router(estudiantes_router)
 
 # ── Endpoints raíz ─────────────────────────────────────────────
 @app.get("/", tags=["Estado"])

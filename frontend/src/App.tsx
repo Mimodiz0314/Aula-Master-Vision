@@ -5,6 +5,8 @@ import { StudentEntry } from './pages/StudentEntry'
 import { TeacherDashboard } from './pages/TeacherDashboard'
 import { LoginDocente } from './pages/LoginDocente'
 import { ReporteView } from './pages/ReporteView'
+import { PanelAdmin } from './pages/PanelAdmin'
+import { GestionEstudiantes } from './pages/GestionEstudiantes'
 
 function Layout({ children }: { children: React.ReactNode }) {
   const [darkMode, setDarkMode] = useState(false)
@@ -26,8 +28,11 @@ function Layout({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('aula_token')
     localStorage.removeItem('aula_docente_id')
     localStorage.removeItem('aula_nombre')
+    localStorage.removeItem('aula_es_admin')
     navigate('/')
   }
+
+  const esAdmin = localStorage.getItem('aula_es_admin') === 'true'
 
   return (
     <div className="min-h-screen w-full relative overflow-hidden bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
@@ -61,6 +66,20 @@ function Layout({ children }: { children: React.ReactNode }) {
 
           {isTeacherView ? (
             <div className="flex items-center gap-3">
+              {esAdmin && (
+                <button
+                  onClick={() => navigate('/admin')}
+                  className="text-sm font-semibold text-teal-600 dark:text-teal-400 px-3 py-1.5 rounded-lg border border-teal-200 dark:border-teal-800 hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors"
+                >
+                  Panel Admin
+                </button>
+              )}
+              <button
+                onClick={() => navigate('/teacher/estudiantes')}
+                className="text-sm font-semibold text-blue-600 dark:text-blue-400 px-3 py-1.5 rounded-lg border border-blue-200 dark:border-blue-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
+              >
+                Estudiantes
+              </button>
               {nombreDocente && (
                 <span className="hidden sm:block text-sm font-medium text-gray-600 dark:text-gray-300">
                   👋 {nombreDocente}
@@ -103,6 +122,8 @@ function App() {
           <Route path="/login" element={<LoginDocente />} />
           <Route path="/teacher" element={<TeacherDashboard />} />
           <Route path="/teacher/reporte/:id" element={<ReporteView />} />
+          <Route path="/teacher/estudiantes" element={<GestionEstudiantes />} />
+          <Route path="/admin" element={<PanelAdmin />} />
         </Routes>
       </Layout>
     </Router>

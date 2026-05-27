@@ -26,6 +26,7 @@ export function LoginDocente() {
       localStorage.setItem('aula_token', data.token)
       localStorage.setItem('aula_docente_id', String(data.docente_id))
       localStorage.setItem('aula_nombre', data.nombre)
+      localStorage.setItem('aula_es_admin', String(data.es_admin || false))
       navigate('/teacher')
     } catch (e: any) {
       setError(e.message || 'Error al iniciar sesión.')

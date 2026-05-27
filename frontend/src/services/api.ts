@@ -70,6 +70,22 @@ export const api = {
       method: 'POST', body: JSON.stringify({ tema, nivel, cantidad })
     }),
   exportExcel: (id: number) => `${BASE}/evaluaciones/${id}/export/excel`,
+
+  // Admin
+  admin: {
+    getDocentes: () => request<any[]>(`${BASE}/admin/docentes`),
+    crearDocente: (body: object) => request<any>(`${BASE}/admin/docentes`, { method: 'POST', body: JSON.stringify(body) }),
+    borrarDocente: (id: number) => request<any>(`${BASE}/admin/docentes/${id}`, { method: 'DELETE' }),
+    cambiarPassword: (id: number, new_password: string) => request<any>(`${BASE}/admin/docentes/${id}/password`, { method: 'PUT', body: JSON.stringify({ new_password }) }),
+  },
+
+  // Estudiantes
+  estudiantes: {
+    getEstudiantes: () => request<any[]>(`${BASE}/estudiantes/`),
+    crearEstudiante: (body: object) => request<any>(`${BASE}/estudiantes/`, { method: 'POST', body: JSON.stringify(body) }),
+    borrarEstudiante: (id: number) => request<any>(`${BASE}/estudiantes/${id}`, { method: 'DELETE' }),
+    cambiarPassword: (id: number, new_password: string) => request<any>(`${BASE}/estudiantes/${id}/password`, { method: 'PUT', body: JSON.stringify({ new_password }) }),
+  }
 }
 
 export { getDocenteId }
