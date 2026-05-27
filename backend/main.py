@@ -41,6 +41,8 @@ frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
 origins = [
     "http://localhost:5173",
     "http://localhost:3000",
+    "https://aulamaster-frontend.onrender.com",
+    "https://adorable-liger-d3746a.netlify.app",
     frontend_url
 ]
 
